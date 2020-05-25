@@ -1,0 +1,34 @@
+JSON server
+  - npm init
+  - npm install json-server
+  - Change package.json by adding a script
+    "start": "json-server -p 3001 -w db.json"
+
+RTMP server
+  - npm init
+  - npm install node-media-server
+  - Add an index.js file and put the configuration.
+  - Change package.json by adding a script
+    "start": "node index.js"
+
+Open Broadcast app for generating streams
+
+/* Configuration for RTMP server */
+const NodeMediaServer = require("node-media-server");
+
+const config = {
+  rtmp: {
+    port: 1935,
+    chunk_size: 60000,
+    gop_cache: true,
+    ping: 30,
+    ping_timeout: 60,
+  },
+  http: {
+    port: 8000,
+    allow_origin: "*",
+  },
+};
+
+var nms = new NodeMediaServer(config);
+nms.run();
